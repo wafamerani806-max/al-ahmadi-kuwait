@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Al Ahmadi Restaurant | Modern Kuwaiti Luxury</title>
+    
+    <!-- Tailwind CSS via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -13,84 +15,236 @@
                         charcoal: '#050505',
                         gold: '#D4AF37',
                         'gold-light': '#F3E5AB',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
                     }
                 }
             }
         }
     </script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
     <style>
-        body { background-color: #050505; color: #ffffff; overflow-x: hidden; }
-        .glowing-beams { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
-        .beam { position: absolute; width: 2px; height: 100%; background: linear-gradient(to bottom, transparent, #D4AF37, transparent); opacity: 0; animation: beam-fall 8s infinite linear; }
+        body {
+            background-color: #050505;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Glowing Beams Background - Fixed Z-index */
+        .glowing-beams {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0; /* Stays at the very bottom */
+            overflow: hidden;
+            background: #050505;
+            pointer-events: none; /* Prevents beams from blocking clicks on links/buttons */
+        }
+
+        .beam {
+            position: absolute;
+            width: 2px;
+            height: 100vh;
+            background: linear-gradient(to bottom, rgba(212, 175, 55, 0), rgba(212, 175, 55, 0.5), rgba(212, 175, 55, 0));
+            opacity: 0;
+            animation: beam-fall 8s infinite linear;
+        }
+
         .beam:nth-child(1) { left: 10%; animation-delay: 0s; }
         .beam:nth-child(2) { left: 30%; animation-delay: 2s; }
         .beam:nth-child(3) { left: 50%; animation-delay: 4s; }
         .beam:nth-child(4) { left: 70%; animation-delay: 1s; }
         .beam:nth-child(5) { left: 90%; animation-delay: 3s; }
-        @keyframes beam-fall { 0% { transform: translateY(-100%); opacity: 0; } 50% { opacity: 0.3; } 100% { transform: translateY(100%); opacity: 0; } }
-        .bento-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(212, 175, 55, 0.1); transition: all 0.4s ease; overflow: hidden; }
-        .bento-card:hover { transform: translateY(-10px); border-color: #D4AF37; box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2); }
-        .bento-card img { width: 100%; h-full; object-cover; opacity: 0.8; transition: opacity 0.4s ease; }
-        .bento-card:hover img { opacity: 1; }
+
+        @keyframes beam-fall {
+            0% { transform: translateY(-100%); opacity: 0; }
+            50% { opacity: 0.5; }
+            100% { transform: translateY(100%); opacity: 0; }
+        }
+
+        /* 3D Hover Effect for Bento Grid */
+        .bento-card {
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .bento-card:hover {
+            transform: translateY(-10px) scale(1.02) rotateX(2deg) rotateY(-2deg);
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.15);
+            border-color: rgba(212, 175, 55, 0.5);
+            z-index: 20;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .gold-gradient-text {
+            background: linear-gradient(to right, #D4AF37, #F3E5AB, #D4AF37);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            background-size: 200% auto;
+            animation: shine 3s linear infinite;
+        }
+
+        @keyframes shine {
+            to {
+                background-position: 200% center;
+            }
+        }
+
+        /* Wrapper to ensure all content sits above the background */
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+        }
     </style>
 </head>
 <body class="antialiased selection:bg-gold selection:text-charcoal">
 
+    <!-- Glowing Beams Background -->
     <div class="glowing-beams">
-        <div class="beam"></div><div class="beam"></div><div class="beam"></div><div class="beam"></div><div class="beam"></div>
+        <div class="beam"></div>
+        <div class="beam"></div>
+        <div class="beam"></div>
+        <div class="beam"></div>
+        <div class="beam"></div>
     </div>
 
+    <!-- Floating Booking Button (Highest Z-index) -->
     <a href="https://wa.me/96596961300" target="_blank" rel="noopener noreferrer" 
-       class="fixed bottom-6 right-6 z-50 bg-gold text-charcoal px-6 py-3 rounded-full font-semibold shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:shadow-[0_0_30px_rgba(212,175,55,0.6)] hover:scale-105 transition-all duration-300 flex items-center gap-2">
+       class="fixed bottom-6 right-6 z-50 bg-gold text-charcoal px-6 py-3 rounded-full font-semibold shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:shadow-[0_0_30px_rgba(212,175,55,0.6)] hover:scale-105 transition-all duration-300 flex items-center gap-2 group">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:animate-bounce"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
         Book a Table
     </a>
 
-    <main class="relative z-10 max-w-6xl mx-auto px-6 py-20">
-        <header class="text-center mb-20">
-            <h1 class="text-6xl md:text-8xl font-bold bg-gradient-to-b from-gold to-gold-light bg-clip-text text-transparent mb-4">
-                Al Ahmadi
-            </h1>
-            <p class="text-xl tracking-[0.4em] text-gray-400 uppercase">The Heritage of Taste</p>
-            <p class="mt-4 text-gray-500 italic">Habeeb Munawer St, Al Farwaniyah, Kuwait</p>
-        </header>
+    <!-- Main Content Wrapper -->
+    <div class="content-wrapper">
+        <main class="max-w-7xl mx-auto px-6 py-12 md:py-24 flex flex-col gap-24">
+            
+            <!-- Hero Section -->
+            <section class="flex flex-col items-center text-center pt-12 md:pt-20">
+                <div class="mb-6 text-gold">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                    </svg>
+                </div>
+                <h2 class="text-gold tracking-widest uppercase text-sm font-semibold mb-4">Al Ahmadi Restaurant</h2>
+                <h1 class="text-5xl md:text-7xl font-serif font-bold mb-6 leading-tight">
+                    The Heritage of Taste <br/> in <span class="gold-gradient-text">Al Farwaniyah</span>
+                </h1>
+                <p class="text-gray-400 max-w-2xl text-lg md:text-xl font-light mb-10">
+                    Experience premium traditional cuisine crafted with passion, authentic spices, and a touch of modern Kuwaiti luxury.
+                </p>
+                <a href="#menu" class="border border-gold text-gold px-8 py-3 rounded-full hover:bg-gold hover:text-charcoal transition-colors duration-300">
+                    Explore Menu
+                </a>
+            </section>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="md:col-span-2 bento-card rounded-3xl min-h-[400px] flex flex-col justify-end relative">
-                <img src="https://images.unsplash.com/photo-1544124499-58912cbddaad?auto=format&fit=crop&w=800&q=80" alt="Signature Grills" class="absolute inset-0 z-0">
-                <div class="p-10 relative z-10 bg-gradient-to-t from-black via-black/50 to-transparent w-full">
-                    <h3 class="text-3xl font-bold text-gold mb-2">Signature Grills</h3>
-                    <p class="text-gray-200">Authentic Kuwaiti charcoal flavors served with perfection.</p>
+            <!-- Bento Menu Grid -->
+            <section id="menu" class="flex flex-col gap-8">
+                <div class="text-center mb-4">
+                    <h2 class="text-3xl md:text-4xl font-serif text-white mb-2">Culinary Excellence</h2>
+                    <div class="w-16 h-1 bg-gold mx-auto rounded-full"></div>
                 </div>
-            </div>
-            <div class="bento-card rounded-3xl flex flex-col justify-end relative">
-                <img src="https://images.unsplash.com/photo-1512132411229-c30391241dd8?auto=format&fit=crop&w=800&q=80" alt="Traditional Dishes" class="absolute inset-0 z-0">
-                <div class="p-10 relative z-10 bg-gradient-to-t from-black via-black/50 to-transparent w-full">
-                    <h3 class="text-2xl font-bold text-gold mb-2">Traditional</h3>
-                    <p class="text-gray-200">Recipes passed through generations.</p>
-                </div>
-            </div>
-            <div class="bento-card rounded-3xl flex flex-col justify-end relative">
-                <img src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=800&q=80" alt="Arabian Sweets" class="absolute inset-0 z-0">
-                <div class="p-10 relative z-10 bg-gradient-to-t from-black via-black/50 to-transparent w-full">
-                    <h3 class="text-2xl font-bold text-gold mb-2">Arabian Sweets</h3>
-                    <p class="text-gray-200">The perfect end to your royal meal.</p>
-                </div>
-            </div>
-            <div class="md:col-span-2 bento-card rounded-3xl p-10 flex flex-col justify-between">
-                <div>
-                    <h3 class="text-3xl font-bold text-gold mb-2">Visit Us</h3>
-                    <p class="text-gray-200">Habeeb Munawer St, Al Farwaniyah, Kuwait</p>
-                </div>
-                <div class="mt-8">
-                    <a href="https://maps.app.goo.gl/Q4wgE82UpkE824uSA" target="_blank" class="border border-gold text-gold px-12 py-5 rounded-full font-bold text-center hover:bg-gold hover:text-charcoal transition w-full block">Get Directions</a>
-                </div>
-            </div>
-        </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[250px] md:auto-rows-[300px]">
+                    <!-- Grills (Large) -->
+                    <div class="bento-card glass-panel rounded-3xl p-8 md:col-span-2 flex flex-col justify-end relative overflow-hidden group">
+                        <div class="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/80 to-transparent z-10"></div>
+                        <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Premium Grills" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-50" />
+                        <div class="relative z-20">
+                            <h3 class="text-3xl font-serif text-gold mb-2">Premium Grills</h3>
+                            <p class="text-gray-300 font-light">Charcoal-fired perfection, marinated in our secret blend of heritage spices.</p>
+                        </div>
+                    </div>
 
-        <footer class="mt-32 text-center text-gray-600 tracking-widest text-sm">
-            ENGINEERED BY AMEER MUAWIYA - DIGITAL BRAND ARCHITECT
+                    <!-- Tradition -->
+                    <div class="bento-card glass-panel rounded-3xl p-8 flex flex-col justify-end relative overflow-hidden group">
+                        <div class="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/80 to-transparent z-10"></div>
+                        <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Traditional Cuisine" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-50" />
+                        <div class="relative z-20">
+                            <h3 class="text-2xl font-serif text-gold mb-2">Tradition</h3>
+                            <p class="text-gray-300 text-sm font-light">Authentic Kuwaiti recipes passed down through generations.</p>
+                        </div>
+                    </div>
+
+                    <!-- Sweets -->
+                    <div class="bento-card glass-panel rounded-3xl p-8 flex flex-col justify-end relative overflow-hidden group">
+                        <div class="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/80 to-transparent z-10"></div>
+                        <img src="https://images.unsplash.com/photo-1587314168485-3236d6710814?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Arabic Sweets" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-50" />
+                        <div class="relative z-20">
+                            <h3 class="text-2xl font-serif text-gold mb-2">Sweets</h3>
+                            <p class="text-gray-300 text-sm font-light">Decadent traditional desserts to complete your journey.</p>
+                        </div>
+                    </div>
+
+                    <!-- Drinks (Large) -->
+                    <div class="bento-card glass-panel rounded-3xl p-8 md:col-span-2 flex flex-col justify-end relative overflow-hidden group">
+                        <div class="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/80 to-transparent z-10"></div>
+                        <img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Artisan Drinks" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-50" />
+                        <div class="relative z-20">
+                            <h3 class="text-3xl font-serif text-gold mb-2">Artisan Drinks</h3>
+                            <p class="text-gray-300 font-light">From classic Arabic coffee to refreshing signature mocktails.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Find Us Section -->
+            <section class="glass-panel rounded-3xl p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8 border-t border-gold/20">
+                <div class="flex-1">
+                    <h2 class="text-3xl font-serif text-gold mb-4">Find Us</h2>
+                    <div class="flex items-start gap-4 mb-6">
+                        <svg class="w-6 h-6 text-gold shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        <div>
+                            <p class="text-white font-medium text-lg">Al Ahmadi Restaurant</p>
+                            <p class="text-gray-400">7XG7+Q4M, Habeeb Munawer St</p>
+                            <p class="text-gray-400">Al Farwaniyah, Kuwait</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <svg class="w-6 h-6 text-gold shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                        <p class="text-gray-400">+965 9696 1300</p>
+                    </div>
+                </div>
+                <div class="flex-1 flex justify-center md:justify-end w-full">
+                    <a href="https://maps.app.goo.gl/Q4wgE82UpkE824uSA" target="_blank" rel="noopener noreferrer" class="w-full md:w-auto text-center bg-white/5 hover:bg-white/10 border border-gold/30 text-white px-8 py-4 rounded-xl transition-all duration-300 flex items-center justify-center gap-3 group">
+                        <svg class="w-5 h-5 text-gold group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path></svg>
+                        Navigate on Google Maps
+                    </a>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="border-t border-white/5 py-8 mt-12">
+            <div class="max-w-7xl mx-auto px-6 text-center">
+                <p class="text-gray-500 text-sm tracking-wide">
+                    Engineered by <span class="text-gold/80">Ameer Muawiya</span> - Digital Brand Architect
+                </p>
+            </div>
         </footer>
-    </main>
+    </div>
 
 </body>
 </html>
