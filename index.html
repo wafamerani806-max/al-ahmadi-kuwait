@@ -28,44 +28,63 @@
         .beam:nth-child(4) { left: 70%; animation-delay: 1s; }
         .beam:nth-child(5) { left: 90%; animation-delay: 3s; }
         @keyframes beam-fall { 0% { transform: translateY(-100%); opacity: 0; } 50% { opacity: 0.3; } 100% { transform: translateY(100%); opacity: 0; } }
-        .bento-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(212, 175, 55, 0.1); transition: all 0.4s ease; }
+        .bento-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(212, 175, 55, 0.1); transition: all 0.4s ease; overflow: hidden; }
         .bento-card:hover { transform: translateY(-10px); border-color: #D4AF37; box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2); }
+        .bento-card img { width: 100%; h-full; object-cover; opacity: 0.8; transition: opacity 0.4s ease; }
+        .bento-card:hover img { opacity: 1; }
     </style>
 </head>
-<body class="antialiased">
+<body class="antialiased selection:bg-gold selection:text-charcoal">
 
     <div class="glowing-beams">
         <div class="beam"></div><div class="beam"></div><div class="beam"></div><div class="beam"></div><div class="beam"></div>
     </div>
 
+    <a href="https://wa.me/96596961300" target="_blank" rel="noopener noreferrer" 
+       class="fixed bottom-6 right-6 z-50 bg-gold text-charcoal px-6 py-3 rounded-full font-semibold shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:shadow-[0_0_30px_rgba(212,175,55,0.6)] hover:scale-105 transition-all duration-300 flex items-center gap-2">
+        Book a Table
+    </a>
+
     <main class="relative z-10 max-w-6xl mx-auto px-6 py-20">
-        <div class="text-center mb-20">
-            <h1 class="text-6xl md:text-8xl font-bold text-gold mb-4">Al Ahmadi</h1>
+        <header class="text-center mb-20">
+            <h1 class="text-6xl md:text-8xl font-bold bg-gradient-to-b from-gold to-gold-light bg-clip-text text-transparent mb-4">
+                Al Ahmadi
+            </h1>
             <p class="text-xl tracking-[0.4em] text-gray-400 uppercase">The Heritage of Taste</p>
-        </div>
+            <p class="mt-4 text-gray-500 italic">Habeeb Munawer St, Al Farwaniyah, Kuwait</p>
+        </header>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="md:col-span-2 bento-card p-10 rounded-3xl min-h-[300px] flex flex-col justify-end">
-                <h3 class="text-3xl font-bold text-gold mb-2">Signature Grills</h3>
-                <p class="text-gray-400">Authentic Kuwaiti charcoal flavors served with perfection.</p>
+            <div class="md:col-span-2 bento-card rounded-3xl min-h-[400px] flex flex-col justify-end relative">
+                <img src="https://images.unsplash.com/photo-1544124499-58912cbddaad?auto=format&fit=crop&w=800&q=80" alt="Signature Grills" class="absolute inset-0 z-0">
+                <div class="p-10 relative z-10 bg-gradient-to-t from-black via-black/50 to-transparent w-full">
+                    <h3 class="text-3xl font-bold text-gold mb-2">Signature Grills</h3>
+                    <p class="text-gray-200">Authentic Kuwaiti charcoal flavors served with perfection.</p>
+                </div>
             </div>
-            <div class="bento-card p-10 rounded-3xl flex flex-col justify-end">
-                <h3 class="text-2xl font-bold text-gold mb-2">Traditional</h3>
-                <p class="text-gray-400">Recipes passed through generations.</p>
+            <div class="bento-card rounded-3xl flex flex-col justify-end relative">
+                <img src="https://images.unsplash.com/photo-1512132411229-c30391241dd8?auto=format&fit=crop&w=800&q=80" alt="Traditional Dishes" class="absolute inset-0 z-0">
+                <div class="p-10 relative z-10 bg-gradient-to-t from-black via-black/50 to-transparent w-full">
+                    <h3 class="text-2xl font-bold text-gold mb-2">Traditional</h3>
+                    <p class="text-gray-200">Recipes passed through generations.</p>
+                </div>
             </div>
-            <div class="bento-card p-10 rounded-3xl flex flex-col justify-end">
-                <h3 class="text-2xl font-bold text-gold mb-2">Arabian Sweets</h3>
-                <p class="text-gray-400">The perfect end to your royal meal.</p>
+            <div class="bento-card rounded-3xl flex flex-col justify-end relative">
+                <img src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=800&q=80" alt="Arabian Sweets" class="absolute inset-0 z-0">
+                <div class="p-10 relative z-10 bg-gradient-to-t from-black via-black/50 to-transparent w-full">
+                    <h3 class="text-2xl font-bold text-gold mb-2">Arabian Sweets</h3>
+                    <p class="text-gray-200">The perfect end to your royal meal.</p>
+                </div>
             </div>
-            <div class="md:col-span-2 bento-card p-10 rounded-3xl flex flex-col justify-end">
-                <h3 class="text-3xl font-bold text-gold mb-2">Visit Us</h3>
-                <p class="text-gray-400">Habeeb Munawer St, Al Farwaniyah, Kuwait</p>
+            <div class="md:col-span-2 bento-card rounded-3xl p-10 flex flex-col justify-between">
+                <div>
+                    <h3 class="text-3xl font-bold text-gold mb-2">Visit Us</h3>
+                    <p class="text-gray-200">Habeeb Munawer St, Al Farwaniyah, Kuwait</p>
+                </div>
+                <div class="mt-8">
+                    <a href="https://maps.app.goo.gl/Q4wgE82UpkE824uSA" target="_blank" class="border border-gold text-gold px-12 py-5 rounded-full font-bold text-center hover:bg-gold hover:text-charcoal transition w-full block">Get Directions</a>
+                </div>
             </div>
-        </div>
-
-        <div class="mt-20 flex flex-col md:flex-row gap-6 justify-center">
-            <a href="https://wa.me/96596961300" class="bg-gold text-charcoal px-12 py-5 rounded-full font-bold text-center hover:scale-105 transition">Book a Table</a>
-            <a href="https://maps.app.goo.gl/Q4wgE82UpkE824uSA" class="border border-gold text-gold px-12 py-5 rounded-full font-bold text-center hover:bg-gold hover:text-charcoal transition">Get Directions</a>
         </div>
 
         <footer class="mt-32 text-center text-gray-600 tracking-widest text-sm">
